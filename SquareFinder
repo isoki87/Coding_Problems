@@ -1,0 +1,185 @@
+package com.leo;
+/*
+* Given points on a 2D plane, find all the squares that are formed
+* by the points' lines.
+*/
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+//Use a Map of Set to DP out repeated lines
+
+public class SquareCounter {
+	//key: slope, value: pairs of lines wiht key = distance and value = number of pairs
+	Map<Double, HashMap<Double, Integer>> slopeToDistanceMap; 
+	List<Line> totalNormalLines;
+	List<Line> verticalLines;
+	Map<Double, Integer> vertPairDistance;
+	List<Line> horizontalLines;
+	
+	SquareCounter(){
+		this.slopeToDistanceMap = new HashMap<>();
+		this.totalNormalLines = new ArrayList<>();
+		this.verticalLines = new ArrayList<>();
+		this.horizontalLines = new ArrayList<>();
+		this.vertPairDistance = new HashMap<>();
+	}
+		
+	public int countSquares(List<Double[]> points){
+		int squares = 0;
+		//This will draw out all the possible lines
+		fillLineLists(points);
+		//This will fill up all the possible slope/distance values of all the pairs
+		//of lines which are non-vertical and non-horizontal
+		fillSlopeToDistanceMap();
+		squares += calcNormalLines();
+		System.out.println("After normal: " + squares);
+		squares += calcSpecLines();	
+		System.out.println(calcSpecLines() + " squares from special lines" );
+		System.out.println("After special: " + squares);
+		return squares;
+	}
+	
+	private int calcSpecLines(){
+		int squares = 0;
+		scanVertPairs();
+		for(int i = 0; i < horizontalLines.size() - 1; i++){
+			for(int j = i + 1; j < horizontalLines.size(); j++){
+				LinePair pair = new LinePair(horizontalLines.get(i), horizontalLines.get(j));
+				if(vertPairDistance.containsKey(pair.distance)){
+					squares += vertPairDistance.get(pair.distance);
+				}
+			}
+		}	
+		return squares;		
+	}
+	
+	private void scanVertPairs(){
+		for(int i = 0; i < verticalLines.size() - 1; i++){
+			for(int j = i + 1; j < verticalLines.size(); j++){
+				LinePair pair = new LinePair(verticalLines.get(i), verticalLines.get(j));
+				int count = 1;
+				if(vertPairDistance.containsKey(pair.distance)){
+					count = vertPairDistance.get(pair.distance);
+					vertPairDistance.put(pair.distance, count + 1);
+				} else {
+					vertPairDistance.put(pair.distance, count);
+				}
+			}			
+		}
+	}
+	
+	private int calcNormalLines(){
+		int squares = 0;
+		HashSet<Double> visited = new HashSet<>();
+		for(Map.Entry<Double, HashMap<Double, Integer>> entry : slopeToDistanceMap.entrySet()){
+			double recip = -1 / entry.getKey();
+			if(visited.contains(recip)){
+				continue;
+			}
+			for(Map.Entry<Double, Integer> e : entry.getValue().entrySet()){
+				if(slopeToDistanceMap.containsKey(recip)){
+					double distance = e.getKey();
+					if(slopeToDistanceMap.get(recip).containsKey(distance)){
+						squares += slopeToDistanceMap.get(recip).get(distance);
+					}
+				}
+			}
+			visited.add(entry.getKey());
+		}
+		return squares;
+	}
+	
+	private void fillSlopeToDistanceMap(){
+		for(int i = 0; i < totalNormalLines.size() - 1; i++){
+			for(int j = i + 1; j < totalNormalLines.size(); j++){
+				if(totalNormalLines.get(i).slope == totalNormalLines.get(j).slope){
+					Line l1 = totalNormalLines.get(i);
+					Line l2 = totalNormalLines.get(j);					
+					LinePair pair = new LinePair(l1, l2);
+					pair.initPairProperties();
+					int count = 1;
+					if(slopeToDistanceMap.containsKey(pair.slope)){
+						if(slopeToDistanceMap.get(pair.slope).containsKey(pair.distance)){
+							count = slopeToDistanceMap.get(pair.slope).get(pair.distance);
+							slopeToDistanceMap.get(pair.slope).put(pair.distance, count + 1);
+						} else {
+							slopeToDistanceMap.get(pair.slope).put(pair.distance, count);
+						}
+					} else {
+						HashMap<Double, Integer> distanceCount = new HashMap<>();
+						distanceCount.put(pair.distance, count);
+						slopeToDistanceMap.put(pair.slope, distanceCount);
+					}
+				}		
+			}
+		}
+	}	
+	
+	private void fillLineLists(List<Double[]> points){
+		for(int i = 0; i < points.size() - 1; i++){
+			for(int j = i + 1; j < points.size(); j++){
+				Line line = new Line(points.get(i), points.get(j));	
+				line.initLineProp();
+				if(line.horizontal){
+					horizontalLines.add(line);
+				} else if(line.vertical){
+					verticalLines.add(line);
+				} else {
+					totalNormalLines.add(line);
+				}
+			}
+		}
+	}
+
+	class LinePair{
+		private Line l1, l2;
+		private double distance, slope;
+		
+		LinePair(Line l1, Line l2){
+			this.l1 = l1;
+			this.l2 = l2;
+		}
+		
+		private double findDistance(Line l1, Line l2){
+			double distance = 0;
+			double xDist = (l1.x1 - l2.x2) * (l1.x1 - l2.x2);
+			double yDist = (l1.y1 - l2.y2) * (l1.y1 - l2.y2);
+			distance = Math.sqrt(xDist + yDist);		
+			return distance;
+		}
+				
+		private void initPairProperties(){
+				this.distance = findDistance(l1, l2);
+				this.slope = l1.slope;
+			}
+		}	
+	
+	class Line{
+		double x1, x2, y1, y2;
+		boolean vertical;
+		boolean horizontal;
+		double slope;
+		
+		Line(Double[] p1, Double[] p2){
+			this.x1 = p1[0];
+			this.x2 = p2[0];
+			this.y1 = p1[1];
+			this.y2 = p2[1];
+		}
+		
+		public void initLineProp(){
+			if(y1 == y2){
+				this.horizontal = true;
+			} else if (x1 == x2){
+				this.vertical = true;
+			} else {
+				this.slope = (y2 - y1) / (x2 - x1);
+			}
+		}
+	}
+}
+	

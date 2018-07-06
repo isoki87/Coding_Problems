@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-//Use a Map of Set to DP out repeated lines
+//Use a Map of Set to DP out repeated lines, key is slope, set of y-intercepts
+//hori and vert lines will be in its own separarte data structures
 
 public class SquareCounter {
 	//key: slope, value: pairs of lines wiht key = distance and value = number of pairs

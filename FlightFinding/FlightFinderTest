@@ -1,0 +1,35 @@
+package com.leo.flightfinder;
+
+import java.util.HashMap;
+
+//How do I override HashMap's equals() method
+
+public class FlightFinderTest {
+	public static void main(String[] args){
+		
+	}
+	
+	
+	
+	/*
+	DestinationInfo a = new DestinationInfo("a", 1, 2);
+	DestinationInfo b = new DestinationInfo("a", 1, 2);
+	System.out.println("Two new objects, with the same inner fields, compared with default .equals() method is: " + a.equals(b));
+	DestinationInfo c = new DestinationInfo("a", 2, 2);
+	System.out.println("Two new objects with different fields, compared with default .equals() method is: " + a.equals(c));
+	HashMap<DestinationInfo, Integer> m = new HashMap<>();
+	m.put(a, 2);
+	m.put(b, 3);
+	System.out.println("Map with two objects that are equal return .equals() true as keys has size of " + m.size());
+	m.put(c, 3);
+	System.out.println("Map with two objects that are different has size of " + m.size());
+	HashMap<Integer, Integer> t = new HashMap<>();
+	t.put(1, 2);
+	t.put(1, 3);
+	System.out.println("Map with two same integer key has size of " + t.size());
+	HashMap<Integer, Integer> r = new HashMap<>();
+	r.put(1, 2);
+	r.put(2, 3);
+	System.out.println("Map with two different integer key has size of " + r.size());
+	*/
+}

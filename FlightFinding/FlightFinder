@@ -1,0 +1,16 @@
+package com.leo.flightfinder;
+
+/*
+ * Given flight plans with time(spent in flight or in waiting), price
+ * Find me the flight with the least distance traveled (Assume time and distance are proportional? Or does time include waiting time, see edge case)
+ * Find me the flight with the cheapest price
+ * 
+ * Time in minutes, price in dollars
+ */
+
+
+//Edge case: A -> B -> A -> C -> D is better than A -> E -> D if you want A -> D, then can we disregard the A-B-A part?
+
+public class FlightFinder {
+	
+}

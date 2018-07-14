@@ -1,11 +1,14 @@
 package com.leo.flightfinder;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Airport {
 	private String name;
+	private Set<String> connections;
 	private Map<String, Double> distanceMap, timeMap, priceMap;
 	
 	Airport(String name){
@@ -13,6 +16,7 @@ public class Airport {
 		this.distanceMap = new HashMap<>();
 		this.timeMap = new HashMap<>();
 		this.priceMap = new HashMap<>();
+		this.connections = new HashSet<>();
 	}	
 	
 	@Override
@@ -48,7 +52,12 @@ public class Airport {
 		return priceMap.get(name);
 	}
 	
+	public boolean isConnectedTo(Airport airport) {
+		return connections.contains(airport.name);
+	}
+	
 	public void updateDestination(String name, double distance, double time, double price) {
+		connections.add(name);
 		distanceMap.put(name, distance);
 		timeMap.put(name, time);
 		priceMap.put(name, price);

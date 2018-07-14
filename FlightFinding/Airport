@@ -1,16 +1,57 @@
 package com.leo.flightfinder;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 public class Airport {
 	private String name;
-	private Map<String, DestinationInfo> destinations;
+	private Map<String, Double> distanceMap, timeMap, priceMap;
 	
-	Airport(String s){
-		this.name = s.toLowerCase();
-		this.destinations = new HashMap<String, DestinationInfo>();
+	Airport(String name){
+		this.name = name;
+		this.distanceMap = new HashMap<>();
+		this.timeMap = new HashMap<>();
+		this.priceMap = new HashMap<>();
+	}	
+	
+	@Override
+	public boolean equals(Object obj) {
+		try {
+			if(this.name.equals(((Airport)obj).name)){
+				return true;
+			}	
+		} catch (ClassCastException e) {
+			System.out.println("Wrong class casted");
+		}
+		return false;
 	}
 	
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public double getDistanceTo(String name) {
+		return distanceMap.get(name);
+	}
+	
+	public double getTimeTo(String name) {
+		return timeMap.get(name);
+	}
+	
+	public double getPriceTo(String name) {
+		return priceMap.get(name);
+	}
+	
+	public void updateDestination(String name, double distance, double time, double price) {
+		distanceMap.put(name, distance);
+		timeMap.put(name, time);
+		priceMap.put(name, price);
+	}
+
 }

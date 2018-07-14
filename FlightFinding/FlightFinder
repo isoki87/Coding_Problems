@@ -1,5 +1,10 @@
 package com.leo.flightfinder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /*
  * Given flight plans with time(spent in flight or in waiting), price
  * Find me the flight with the least distance traveled (Assume time and distance are proportional? Or does time include waiting time, see edge case)
@@ -12,5 +17,24 @@ package com.leo.flightfinder;
 //Edge case: A -> B -> A -> C -> D is better than A -> E -> D if you want A -> D, then can we disregard the A-B-A part?
 
 public class FlightFinder {
+	//Is there a way to pass an argument parameter to represent the part of the field?
+	//I want to write only ONE bestPath method that can be applied to shortest path, cheapest path, etc.
+	//This method will return different optimal paths based on the argument condition that was passed in.
+	public List<Airport> shortestPath(Airport start, Airport end){
+		List<Airport> shortestPath = new ArrayList<>();
+		Map<Airport, Integer> smallestValueToStart = new HashMap<>();
+		Map<Airport, Airport> previousAirport = new HashMap<>();
+		shortestPathInternal(start, end, previousAirport, smallestValueToStart);
+		mapOutPath(start, end, previousAirport, shortestPath);
+		return shortestPath;
+	}
+	
+	private void shortestPathInternal(Airport start, Airport end, Map<Airport, Airport> previousAirport, Map<Airport, Integer> smallestValueToStart) {
+		//Djikstra's theorem
+	}
+	
+	private void mapOutPath(Airport start, Airport end, Map<Airport, Airport> previousAirport, List<Airport> shortestPath) {
+		
+	}
 	
 }

@@ -4,7 +4,7 @@
 * regular expressions of '.' and '*', where '.' implies any
 * character, and '*' implies any number of the PRECEEDING character
 * The comparison should return a boolean upon isMatch(String s, String p)
-* Examples: 
+* Test cases: 
 * "aa", "aa" -> true
 * "aaa", "a" -> false
 * "aaa", "a*" -> true

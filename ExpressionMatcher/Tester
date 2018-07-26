@@ -1,0 +1,13 @@
+package com.leo.interview;
+
+/*
+* plugged in all test cases thought up from example
+*
+*/
+
+public class Tester {
+	public static void main(String[] args){
+		ExpressionMatcher t = new ExpressionMatcher();
+		System.out.println(t.isMatch("abk", ".*b"));
+	}
+}

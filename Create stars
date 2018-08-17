@@ -1,0 +1,95 @@
+import java.io.*;
+import java.util.*;
+
+/*
+ * To execute Java, please define "static void main" on a class
+ * named Solution.
+ *
+ * If you need more classes, simply define them inline.
+ */
+
+class Solution {
+  public static void main(String[] args) {
+    printSpiral(10);
+  }
+  
+  public static printSpiral(int layers){
+    //for each layer need 4 sides
+    //Each side will have 1 more star than the last
+    //The sides will be either vertical or horizontal
+    
+    //Keep track of the lines
+    //As you move down, every odd
+    //Every odd lines will not have horizontals
+    //Every even lines will have horizontals
+    
+    //Print from the outside in
+    //For verticals edges, print out last edge's stars - 4, plus 
+  }
+}
+/*
+* * * * *
+*       *
+*       *
+*   * * *
+*
+* * * * * * *
+
+
+* * * * * * * *
+              *
+  * * * * *   *
+  *       *   *
+  *       *   *
+  *   * * *   *
+  *           *
+  * * * * * * *
+
+*/
+
+/* 
+
+
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      
+        *                                                               *      
+        *   * * * * * * * * * * * * * * * * * * * * * * * * * * * * *   *      
+        *   *                                                       *   *      
+        *   *   * * * * * * * * * * * * * * * * * * * * * * * * *   *   *      
+        *   *   *                                               *   *   *      
+        *   *   *   * * * * * * * * * * * * * * * * * * * * *   *   *   *      
+        *   *   *   *                                       *   *   *   *      
+        *   *   *   *   * * * * * * * * * * * * * * * * *   *   *   *   *      
+        *   *   *   *   *                               *   *   *   *   *      
+        *   *   *   *   *   * * * * * * * * * * * * *   *   *   *   *   *      
+        *   *   *   *   *   *                       *   *   *   *   *   *      
+        *   *   *   *   *   *   * * * * * * * * *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *               *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   * * * * *   *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   *       *   *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   *   * * *   *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   *           *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *   * * * * * * *   *   *   *   *   *   *      
+        *   *   *   *   *   *   *                   *   *   *   *   *   *      
+        *   *   *   *   *   *   * * * * * * * * * * *   *   *   *   *   *      
+        *   *   *   *   *   *                           *   *   *   *   *      
+        *   *   *   *   *   * * * * * * * * * * * * * * *   *   *   *   *      
+        *   *   *   *   *                                   *   *   *   *      
+        *   *   *   *   * * * * * * * * * * * * * * * * * * *   *   *   *      
+        *   *   *   *                                           *   *   *      
+        *   *   *   * * * * * * * * * * * * * * * * * * * * * * *   *   *      
+        *   *   *                                                   *   *      
+        *   *   * * * * * * * * * * * * * * * * * * * * * * * * * * *   *   *  
+        *   *                                                           *   *  
+        *   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *   *  
+        *                                                                   *  
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+                                                                             
+                                                                               
+
+
+ */

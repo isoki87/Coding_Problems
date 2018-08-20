@@ -1,9 +1,10 @@
 public class KnightDialer{
   public static void main(String[] args){
-    System.out.println(knightDialer(3));
+    KnightDialer kD = new KnightDialer();
+    System.out.println(kD(3));
   }
   
-  public static int knightDialer(int moves){
+  public int knightDialer(int moves){
     int[][] validMoves = new int[10][];
     knightMoveInitializer(validMoves);
     //Assuming no n=0 case
@@ -35,7 +36,7 @@ public class KnightDialer{
   }
 
   //ArrayList may not be initialized, might give error
-  private static void knightMoveInitializer(int[][] validMoves){
+  private void knightMoveInitializer(int[][] validMoves){
     for(int i = 0; i < validMoves.length; i++){
       switch(i){
         case 0: validMoves[i] = new int[2];

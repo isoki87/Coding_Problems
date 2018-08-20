@@ -1,6 +1,15 @@
 package com.leo.interview;
 
 public class SpiralPrinter {
+	public static void main(String[] args){
+		SpiralPrinter sP = new SpiralPrinter();
+		sP.printSpiral(4);
+		System.out.print("\n");
+		sP.printSpiral(3);
+		System.out.print("\n");
+		sP.printSpiral(5);
+	}
+	
 	public void printSpiral(int layers){
 		char[][] board = new char[4 * layers][8 * layers + 1];
 		//four cases, move left, move up, move right, move down
